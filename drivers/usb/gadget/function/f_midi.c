@@ -1074,14 +1074,6 @@ static int f_midi_bind(struct usb_configuration *c, struct usb_function *f)
 		}
 	}
 
-	if (gadget_is_superspeed(c->cdev->gadget)) {
-		bulk_in_desc.wMaxPacketSize = cpu_to_le16(1024);
-		bulk_out_desc.wMaxPacketSize = cpu_to_le16(1024);
-		f->ss_descriptors = usb_copy_descriptors(midi_ss_function);
-		if (!f->ss_descriptors)
-			goto fail_f_midi;
-	}
-
 	kfree(midi_function);
 	kfree(midi_ss_function);
 
